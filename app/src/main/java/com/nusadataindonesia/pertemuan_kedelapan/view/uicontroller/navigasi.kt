@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.nusadataindonesia.pertemuan_kedelapan.model.Datajk
 import com.nusadataindonesia.pertemuan_kedelapan.model.Siswa
 import com.nusadataindonesia.pertemuan_kedelapan.view.FormSiswa
+import com.nusadataindonesia.pertemuan_kedelapan.view.TampilSiswa
 
 enum class Navigasi {
     Formulir,
@@ -49,6 +50,16 @@ fun SiswaApp(
                     }
                 )
             }
+            composable(route = Navigasi.Detail.name) {
+                TampilSiswa(
+                    statusUiSiswa = statusUiSiswa,
+                    onBackButtonClicked = { cancelAndBackToFormulir(navController) }
+                )
+            }
         }
     }
+}
+
+private fun cancelAndBackToFormulir(navController: NavHostController) {
+    navController.popBackStack(Navigasi.Formulir.name, inclusive = false)
 }
